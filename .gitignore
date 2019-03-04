@@ -1,0 +1,16 @@
+# OSX
+.DS_Store
+
+# Do not track IDE files
+.idea/
+.vscode/
+*.iml
+
+# don't commit node_modules
+node_modules
+
+# Do not track builds
+build/
+
+# NPM package generated files:
+dist/contracts.json

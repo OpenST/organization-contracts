@@ -1,0 +1,52 @@
+{
+  "name": "@openstfoundation/organization-contracts",
+  "version": "1.0.0-beta.1",
+  "description": "Organization contracts manage application permissions",
+  "main": "dist/index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "compile": "truffle compile",
+    "compile-all": "truffle compile --all",
+    "test": "truffle test",
+    "ganache": "sh tools/runGanacheCli.sh",
+    "build-package": "node tools/build_package.js",
+    "prepack": "npm run compile-all && npm run build-package",
+    "lint": "eslint test tools -c .eslintrc.json --ext js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/OpenST/organization-contracts.git"
+  },
+  "keywords": [
+    "OpenST",
+    "OST",
+    "web3",
+    "Ethereum",
+    "ACL",
+    "permissions"
+  ],
+  "author": "OpenST Foundation Ltd.",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/OpenST/organization-contracts/issues"
+  },
+  "homepage": "https://openst.org/",
+  "files": [
+    "dist"
+  ],
+  "devDependencies": {
+    "abi-decoder": "1.2.0",
+    "assert": "1.4.1",
+    "bn.js": "4.11.8",
+    "chai": "4.2.0",
+    "eslint": "5.10.0",
+    "eslint-config-airbnb-base": "13.1.0",
+    "eslint-plugin-import": "2.14.0",
+    "ganache-cli": "6.1.8",
+    "mocha": "5.2.0",
+    "truffle": "5.0.6",
+    "web3": "1.0.0-beta.36"
+  }
+}
