@@ -35,13 +35,13 @@ The contracts and interfaces in this repository are primarily intended for use i
 
 ### Compiling the contracts
 
-The following npm script compiles updated contracts from the last call using [truffle]:
+The following npm script compiles updated contracts since the last compile using [truffle]:
 
 ```bash
 npm run compile
 ```
 
-To compile all contracts:
+To compile all contracts, including the ones that haven't changed:
 
 ```bash
 npm run compile-all
@@ -58,7 +58,7 @@ npm run ganache-cli
 Test the contracts using [truffle]:
 
 ```bash
-npm run test
+npm test
 ```
 
 ### Linting
@@ -86,7 +86,7 @@ To contribute code, please review our [Developer Guidelines] and ensure that you
 ### Community
 
 * [Forum][discourse]
-* [Gitter][gitter]
+* [Gitter]
 
 [brandedtoken-contracts]: https://github.com/OpenSTFoundation/brandedtoken-contracts
 [code of conduct]: https://github.com/OpenST/developer-guidelines/blob/master/CODE_OF_CONDUCT.md
