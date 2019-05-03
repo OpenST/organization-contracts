@@ -13,7 +13,8 @@
     "ganache": "sh tools/runGanacheCli.sh",
     "build-package": "node tools/build_package.js",
     "prepack": "npm run compile-all && npm run build-package",
-    "lint": "eslint test tools -c .eslintrc.json --ext js"
+    "lint": "eslint test tools -c .eslintrc.json --ext js",
+    "generate" : "ts-generator ts-generator.json"
   },
   "repository": {
     "type": "git",
