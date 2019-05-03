@@ -1,0 +1,7 @@
+[
+  {
+    "generator": "typechain",
+    "files": "./build/**/*.json",
+    "target": "web3-1.0.0"
+  }
+]
