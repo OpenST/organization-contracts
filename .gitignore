@@ -5,6 +5,8 @@
 .idea/
 .vscode/
 *.iml
+*.swp
+tags
 
 # don't commit node_modules
 node_modules
