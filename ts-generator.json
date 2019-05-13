@@ -1,0 +1,8 @@
+[
+  {
+    "generator": "typechain",
+    "files": "./build/**/*/!(Migrations.json)",
+    "target": "web3-1.0.0",
+    "outDir" : "interacts"
+  }
+]
