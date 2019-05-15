@@ -8,7 +8,7 @@
   },
   "scripts": {
     "compile": "truffle compile",
-    "compile-all": "truffle compile --all --reset",
+    "compile-all": "truffle compile --all",
     "test": "truffle test",
     "ganache": "./tools/runGanacheCli.sh",
     "build-package": "node tools/build_package.js",
