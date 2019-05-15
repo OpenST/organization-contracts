@@ -23,7 +23,7 @@ before_install:
 install:
   - npm ci
 before_script:
-  - npm run ganache
+  - npm run ganache </dev/null 1>/dev/null 2>&1 &
   - npm run compile-all
 script:
   - npm run lint
