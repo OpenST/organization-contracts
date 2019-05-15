@@ -21,6 +21,8 @@
 
 'use strict';
 
+const abiDecoder = require('abi-decoder');
+
 class Web3EventsDecoder {
   static getFormattedEvents(eventsData) {
     const formattedEvents = {};
@@ -68,7 +70,7 @@ class Web3EventsDecoder {
     // Transaction receipt not found
     if (!txReceipt) {
       console.error(' Transaction receipt was not found.');
-      return;
+      return {};
     }
 
     // Block not yet mined
@@ -76,52 +78,40 @@ class Web3EventsDecoder {
       console.error(
         ' Transaction not yet mined. Please try after some time. ',
       );
-      return;
+      return {};
     }
 
     let logs = [];
 
     // Backwards compatibility:
     if (txReceipt.logs.length > 0) {
-      logs = txReceipt.logs;
+      ({ logs } = txReceipt);
     } else if (txReceipt.rawLogs.length > 0) {
       logs = txReceipt.rawLogs;
     }
 
     if (logs.length > 0) {
-      const abiDecoder = require('abi-decoder');
-
       const relevantLogs = [];
 
-      for (let i = 0; i < logs.length; i++) {
+      for (let i = 0; i < logs.length; i += 1) {
         const log = logs[i];
         const currContractAddrFromReceipt = log.address;
 
-        if (!currContractAddrFromReceipt) {
-          // No contract found for contract address.
-          continue;
-        }
+        if (currContractAddrFromReceipt && currContractAddrFromReceipt === contractAddr) {
+          if (log.topics === undefined || log.topics.length === 0) {
+            if (log.event !== undefined) {
+              decodedEvents.push(log);
+            }
+          } else {
+            if (!contractAbi) {
+              // ABI not found for contract.
+              return {};
+            }
 
-        if (currContractAddrFromReceipt != contractAddr) {
-          // Skipping event of contract that is not under inspection.
-          continue;
-        }
-
-        if (log.topics === undefined || log.topics.length === 0) {
-          // Logs that have an event already don't need to be encoded.
-          if (log.event !== undefined) {
-            decodedEvents.push(log);
+            relevantLogs.push(log);
+            abiDecoder.addABI(contractAbi);
           }
-          continue;
         }
-
-        if (!contractAbi) {
-          // ABI not found for contract.
-          return;
-        }
-
-        relevantLogs.push(log);
-        abiDecoder.addABI(contractAbi);
       }
 
       if (relevantLogs.length > 0) {
