@@ -91,6 +91,7 @@ contract('Organization.constructor()', async (accounts) => {
     const count = workers.length;
     for (let i = 0; i < count; i += 1) {
       const worker = workers[i];
+      // eslint-disable-next-line no-await-in-loop
       const setExpirationHeight = await organization.workers.call(worker);
       assert(
         setExpirationHeight.eqn(expirationHeight),

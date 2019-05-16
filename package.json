@@ -10,7 +10,7 @@
     "compile": "truffle compile",
     "compile-all": "truffle compile --all",
     "test": "truffle test",
-    "ganache": "sh tools/runGanacheCli.sh",
+    "ganache": "./tools/runGanacheCli.sh",
     "build-package": "node tools/build_package.js",
     "prepack": "npm run compile-all && npm run build-package",
     "lint": "eslint test tools -c .eslintrc.json --ext js",

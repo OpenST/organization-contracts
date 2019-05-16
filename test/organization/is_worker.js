@@ -57,6 +57,7 @@ contract('Organization.isWorker()', async (accounts) => {
 
     // Dummy Transaction to increase block number.
     for (let i = 0; i < deltaExpirationHeight; i += 1) {
+      // eslint-disable-next-line no-await-in-loop
       await Utils.advanceBlock();
     }
     assert.strictEqual(
@@ -79,6 +80,7 @@ contract('Organization.isWorker()', async (accounts) => {
      */
     for (let i = 0; i < deltaExpirationHeight - 1; i += 1) {
       assert.strictEqual(
+        // eslint-disable-next-line no-await-in-loop
         await organization.isWorker.call(worker),
         true,
         'The worker should be active at this height.',
