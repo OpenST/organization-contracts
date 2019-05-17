@@ -211,14 +211,16 @@ contract Organization is OrganizationInterface {
     }
 
     /**
-     * @notice Sets the admin address. Can only be called by owner or current
-     *         admin. If called by the current admin, adminship is transferred
-     *         to the given address immediately.
-     *         It is discouraged to set the admin address to be the same as the
-     *         address of the owner. The point of the admin is to act on behalf
-     *         of the organization without requiring the possibly very safely
-     *         stored owner key(s).
-     *         Admin can be set to `address(0)` if no admin is desired.
+     * @notice Sets a new admin address.
+     *
+     *         An admin address can be set to `address(0)` if no admin is
+     *         desired.
+     *
+     *         Requires:
+     *              - Only owner or admin can call.
+     *              - A new admin address is not the same as the current
+     *                owner address.
+     *
      *
      * @param _admin Admin address to be set.
      *
@@ -231,14 +233,13 @@ contract Organization is OrganizationInterface {
         onlyOwnerOrAdmin
         returns (bool success_)
     {
-        /*
-         * If the address does not change, the call is considered a success,
-         * but we don't need to emit an event as it did not actually change.
-         */
-        if (admin != _admin) {
-            emit AdminAddressChanged(_admin, admin);
-            admin = _admin;
-        }
+        require(
+            owner != _admin,
+            "A new admin address is the same as the current owner."
+        );
+
+        emit AdminAddressChanged(_admin, admin);
+        admin = _admin;
 
         success_ = true;
     }

@@ -48,6 +48,13 @@ contract('Organization.setAdmin()', async (accounts) => {
     );
   });
 
+  it('reverts when new admin address is the same as the current owner address', async () => {
+    await Utils.expectRevert(
+      organization.setAdmin(owner, { from: owner }),
+      'A new admin address is the same as the current owner.',
+    );
+  });
+
   it('should pass when valid admin is passed by owner', async () => {
     const newAdmin = accounts[2];
     await organization.setAdmin(newAdmin, { from: owner });
@@ -92,6 +99,7 @@ contract('Organization.setAdmin()', async (accounts) => {
       admin,
       'The event should emit the correct admin address.',
     );
+
     assert.strictEqual(
       events.AdminAddressChanged.previousAdmin,
       previousAdmin,
@@ -99,21 +107,20 @@ contract('Organization.setAdmin()', async (accounts) => {
     );
   });
 
-  it('Should not emit an event when the address did not change', async () => {
-    await organization.setAdmin(admin, { from: owner });
-
-    /*
-     * The address was already set before. This should pass, but not emit an
-     * event.
-     */
-    const transaction = await organization.setAdmin(admin, { from: owner });
+  it('Should emit an event when the address did not change', async () => {
+    const currentAdmin = await organization.admin.call();
+    const transaction = await organization.setAdmin(currentAdmin, { from: owner });
 
     const events = EventsDecoder.getEvents(transaction, organization);
 
     assert.strictEqual(
-      events.AdminAddressChanged,
-      undefined,
-      'The event should not be emitted when the address does not change.',
+      events.AdminAddressChanged.previousAdmin,
+      currentAdmin,
+    );
+
+    assert.strictEqual(
+      events.AdminAddressChanged.newAdmin,
+      currentAdmin,
     );
   });
 });
