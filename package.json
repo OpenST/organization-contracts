@@ -12,7 +12,7 @@
     "test": "truffle test",
     "ganache": "./tools/runGanacheCli.sh",
     "build-package": "node tools/build_package.js",
-    "prepack": "npm run compile-all && npm run build-package",
+    "prepack": "npm run compile-all && npm run generate && npm run build-package && ./node_modules/.bin/tsc ./dist/*.ts",
     "lint": "eslint test tools -c .eslintrc.json --ext js",
     "generate": "ts-generator ts-generator.json",
     "postinstall": "npm run compile-all && npm run generate"
@@ -46,12 +46,14 @@
     "eslint": "5.10.0",
     "eslint-config-airbnb-base": "13.1.0",
     "eslint-plugin-import": "2.14.0",
+    "fs-extra": "8.0.1",
     "ganache-cli": "6.4.3",
     "mocha": "5.2.0",
     "openzeppelin-solidity": "2.1.1",
-    "truffle": "5.0.6",
+    "truffle": "5.0.19",
     "ts-generator": "0.0.8",
     "typechain": "0.3.14",
+    "typescript": "3.4.5",
     "web3": "1.0.0-beta.36"
   }
 }
