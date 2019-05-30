@@ -22,7 +22,6 @@ pragma solidity ^0.5.0;
 
 import "./OrganizationInterface.sol";
 
-
 /**
  * @title Organization contract handles an organization and its workers.
  *
