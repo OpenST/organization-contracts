@@ -20,9 +20,7 @@ pragma solidity ^0.5.0;
 //
 // ----------------------------------------------------------------------------
 
-import "openzeppelin-solidity/contracts/math/SafeMath.sol";
 import "./OrganizationInterface.sol";
-
 
 /**
  * @title Organization contract handles an organization and its workers.
@@ -35,12 +33,6 @@ import "./OrganizationInterface.sol";
  *         of the `OrganizationInterface`, a notion of an admin does not exist.
  */
 contract Organization is OrganizationInterface {
-
-
-    /* Using */
-
-    using SafeMath for uint256;
-
 
     /* Events */
 
