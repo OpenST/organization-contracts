@@ -68,6 +68,7 @@ contract('Organization.setWorker()', async (accounts) => {
     const blockNumber = await web3.eth.getBlockNumber();
     expirationHeight = blockNumber + expirationHeightDelta;
     for (let i = 0; i < expirationHeightDelta; i += 1) {
+      // eslint-disable-next-line no-await-in-loop
       await Utils.advanceBlock();
     }
 
